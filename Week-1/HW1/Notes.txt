@@ -1,0 +1,124 @@
+1)Postgres Command:-
+winpty docker run -it \
+    -e POSTGRES_USER="root" \
+    -e POSTGRES_PASSWORD="root" \
+    -e POSTGRES_DB="ny_taxi" \
+    -v $(pwd)//ny_taxi_postgres_data:/var/lib/postgresql/data \
+    -p 5432:5432 \
+    postgres:13
+
+2)Connect pgcli to postgres through jupyter notebook
+
+3)Connecting postgres and pgadmin through network
+ docker network create pg-network
+
+ winpty docker run -it \
+    -e POSTGRES_USER="root" \
+    -e POSTGRES_PASSWORD="root" \
+    -e POSTGRES_DB="ny_taxi" \
+    -v C://Users//gagan//OneDrive//Desktop//Learnings//DataTalk//practice//ny_taxi_postgres_data:/var/lib/postgresql/data \
+    -p 5432:5432 \
+    --network=pg-network \
+    --name pg-database \
+    postgres:13
+
+winpty docker run -it \
+    -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
+    -e PGADMIN_DEFAULT_PASSWORD="root" \
+    -p 8080:80 \
+    --network=pg-network \
+    --name pg-admin \
+    dpage/pgadmin4
+
+4)To dockerize the postgres and pgadmin process
+
+C://Users//gagan//OneDrive//Documents//python//Python_practice//venv//Scripts//python.exe ingest_data.py \
+C://Users//gagan//AppData//Roaming//Microsoft//Windows//Start Menu//Programs//Python 3.12 ingest.py \
+
+python "C:/Users/OneDrive/Desktop/Learnings/DataTalk/HW1/ingest.py" \
+    --user=root \
+    --password=root \
+    --host=localhost \
+    --port=5432 \
+    --db=ny_taxi \
+    --table_name green_taxi_data taxi_zone\
+    --url "https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz" "https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv"
+
+docker build -t ingest:1.0 .
+
+winpty docker run -it \
+    --network=pg-network \
+    ingest:1.0 \
+    --user=root \
+    --password=root \
+    --host=pg-database \
+    --port=5432 \
+    --db=ny_taxi \
+    --table_name green_taxi_data taxi_zone \
+    --url "https://github.com/DataTalksClub/nyc-tlc-data/releases/download/green/green_tripdata_2019-09.csv.gz" "https://s3.amazonaws.com/nyc-tlc/misc/taxi+_zone_lookup.csv"
+
+5) used docker compose to connect postgres and pgadmin
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
+symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # google_bigquery_dataset.dataset will be created
+  + resource "google_bigquery_dataset" "dataset" {
+      + creation_time              = (known after apply)
+      + dataset_id                 = "ny_taxi"
+      + delete_contents_on_destroy = false
+      + etag                       = (known after apply)
+      + id                         = (known after apply)
+      + labels                     = (known after apply)
+      + last_modified_time         = (known after apply)
+      + location                   = "US"
+      + project                    = "engaged-shade-411420"
+      + self_link                  = (known after apply)
+    }
+
+  # google_storage_bucket.data-lake-bucket will be created
+  + resource "google_storage_bucket" "data-lake-bucket" {
+      + force_destroy               = true
+      + id                          = (known after apply)
+      + location                    = "US"
+      + name                        = "engaged-shade-411420"
+      + project                     = (known after apply)
+      + public_access_prevention    = (known after apply)
+      + self_link                   = (known after apply)
+      + storage_class               = "STANDARD"
+      + uniform_bucket_level_access = true
+      + url                         = (known after apply)
+
+      + lifecycle_rule {
+          + action {
+              + type = "Delete"
+            }
+          + condition {
+              + age                   = 30
+              + matches_prefix        = []
+              + matches_storage_class = []
+              + matches_suffix        = []
+              + with_state            = (known after apply)
+            }
+        }
+
+      + versioning {
+          + enabled = true
+        }
+    }
+
+Plan: 2 to add, 0 to change, 0 to destroy.
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value: yes
+
+google_bigquery_dataset.dataset: Creating...
+google_storage_bucket.data-lake-bucket: Creating...
+google_bigquery_dataset.dataset: Creation complete after 1s [id=projects/engaged-shade-411420/datasets/ny_taxi]
+google_storage_bucket.data-lake-bucket: Creation complete after 1s [id=engaged-shade-411420]
