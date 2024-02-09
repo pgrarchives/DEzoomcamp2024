@@ -1,0 +1,31 @@
+1) 
+CREATE OR REPLACE EXTERNAL TABLE `my-projectsiva123.de_zoomcamp_bigquery.green_tripdata_2022_all`
+OPTIONS (
+  format = 'PARQUET',
+  uris = ['gs://de_zoomcamp_bigquery/green_taxi_data_2022/green_tripdata_2022-*.parquet']
+);
+SELECT COUNT(DISTINCT PULocationID) FROM `my-projectsiva123.de_zoomcamp_bigquery.green_tripdata_2022_all`;
+
+2)
+SELECT COUNT(DISTINCT PULocationID ) FROM `my-projectsiva123.de_zoomcamp_bigquery.green_tripdata_2022_all` ;
+
+3)
+SELECT  count(*) FROM `my-projectsiva123.de_zoomcamp_bigquery.green_tripdata_2022_all` where fare_amount=0
+
+4)
+CREATE OR REPLACE TABLE `my-projectsiva123.de_zoomcamp_bigquery.green_tripdata_non_partitioned` AS
+SELECT * FROM `my-projectsiva123.de_zoomcamp_bigquery.green_tripdata_2022_all`;
+
+5)
+CREATE OR REPLACE TABLE `my-projectsiva123.de_zoomcamp_bigquery.green_tripdata_partitioned` 
+PARTITION BY 
+DATE(lpep_pickup_datetime) AS
+SELECT * FROM `my-projectsiva123.de_zoomcamp_bigquery.green_tripdata_2022_all`;
+
+6)
+SELECT DISTINCT(PULocationID) from `my-projectsiva123.de_zoomcamp_bigquery.green_tripdata_partitioned`
+where date(lpep_pickup_datetime) between '2022-06-01' and '2022-06-30'
+
+7)
+SELECT DISTINCT(PULocationID) from `my-projectsiva123.de_zoomcamp_bigquery.green_tripdata_non_partitioned`
+where date(lpep_pickup_datetime) between '2022-06-01' and '2022-06-30'
