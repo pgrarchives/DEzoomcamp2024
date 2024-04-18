@@ -21,6 +21,8 @@ This dataset contains 9,450 records of noise complaints from Montgomery County, 
 - **Case Sub-Type**: The type of noise complaint.
 - **Address**: The location of the noise incident, which may be anonymized.
 
+Dataset source: https://catalog.data.gov/dataset/noise-complaints 
+
 # Data Processing Workflow Overview
 
 ## Project Structure
@@ -44,5 +46,23 @@ The orchestration of these components is managed by MAGE, which coordinates the 
 5. Insights and reports are generated through Looker Studio.
 
 This workflow enables a comprehensive approach to data engineering, from collection to actionable insights.
+![Screenshot 2024-04-17 195418](https://github.com/pgrarchives/DEzoomcamp2024/assets/112724112/484d9302-69ce-475a-8d33-6a255ca997d7)
+![Screenshot 2024-04-17 195509](https://github.com/pgrarchives/DEzoomcamp2024/assets/112724112/978dfa29-5161-4d51-9065-1f66a032ddc0)
+![Screenshot 2024-04-17 195551](https://github.com/pgrarchives/DEzoomcamp2024/assets/112724112/8673fdab-ddb1-427c-96ba-66f715f155ac)
+![image](https://github.com/pgrarchives/DEzoomcamp2024/assets/112724112/d2908c4c-2ac2-45a2-9ec4-65443bd7675f)
+![image](https://github.com/pgrarchives/DEzoomcamp2024/assets/112724112/b92def94-1045-4adb-8431-f0e3bc0defef)
 
-Dataset source: https://catalog.data.gov/dataset/noise-complaints 
+# Insights from Noise Complaints Data in Montgomery County
+
+## Key Findings
+
+- **Industrial vs. Residential**: Industrial/commercial noise complaints slightly outnumber those from residential sources.
+- **Complaint Trends**: The total number of complaints per year shows variability, indicating potential patterns or seasonal trends that merit further investigation.
+- **Complaint Diversity**: A range of noise complaint types exists, with several sub-categories like equipment noise and multi-tenant disturbances.
+- **Resolution Timeframes**: The dataset includes average resolution times, which vary across complaint types and can inform response efficiency analysis.
+
+These insights can guide local authorities in noise management and policy-making.
+
+
+
+
