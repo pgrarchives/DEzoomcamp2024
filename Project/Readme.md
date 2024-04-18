@@ -54,6 +54,7 @@ This workflow enables a comprehensive approach to data engineering, from collect
 
 # Insights from Noise Complaints Data in Montgomery County
 
+![Screenshot 2024-04-17 205348](https://github.com/pgrarchives/DEzoomcamp2024/assets/112724112/f9a231b8-2b45-4d13-9dc9-175b776d3c5b)
 ## Key Findings
 
 - **Industrial vs. Residential**: Industrial/commercial noise complaints slightly outnumber those from residential sources.
@@ -63,6 +64,26 @@ This workflow enables a comprehensive approach to data engineering, from collect
 
 These insights can guide local authorities in noise management and policy-making.
 
+# Project Setup Guide for Noise Complaints Analysis
 
+## Prerequisites
+Before you begin, ensure you have a Google Cloud Platform (GCP) account and have generated a service account key for accessing various Google services like MAGE and BigQuery.
+
+## Steps for Reproducibility
+
+1. **Clone the Repository**: Clone the GitHub repo to your local machine to get started with the analysis.
+2. **GCP Account and Service Keys**: Create a GCP account if you haven't already and download the service account keys. Place these keys in the designated project folder.
+3. **Environment Setup**: Open the project in Visual Studio Code and execute the `docker-compose.yaml` file to set up the necessary environment.
+4. **Access MAGE**: With the services running, navigate to `http://localhost:6789/` to access MAGE's interface.
+5. **Cloud Storage & BigQuery**: Set up the required buckets in Google Cloud Storage and create the dataset in BigQuery for data storage and management.
+6. **Data Processing with Dataproc**: Utilize the Dataproc service for distributed data processing, leveraging Apache Spark for transformations.
+7. **Analytics in BigQuery**: Analyze the transformed data within BigQuery, executing queries for insightful trends and metrics.
+8. **Visualization with Looker Studio**: Use Looker Studio to create visual dashboards that effectively communicate the analyzed data.
+
+Follow these steps to ensure a smooth setup and replication of the noise complaints analysis project.
+
+# Acknowledgments
+
+Big shoutout to DataTalk.club for their exceptional course that greatly contributed to the development of this project!
 
 
